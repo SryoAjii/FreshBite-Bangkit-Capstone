@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">FreshBite</string>
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <string name="welcome_description">Keep it Fresh with FreshBite!\n Your Fruit\'s Best Friend!</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="login_title">Want to check your fruit freshness?</string>
+    <string name="login_message">Please insert your data</string>
+    <string name="name">Name</string>
+    <string name="title_signup_page">Pleate fill out your information</string>
+    <string name="logout">Logout</string>
+    <string name="email_error">Please enter a valid email</string>
+    <string name="password_error">Password must not be less than 8 characters</string>
+    <string name="analyze">Analyze</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+</resources>
