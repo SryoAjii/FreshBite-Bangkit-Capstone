@@ -8,11 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.freshbite.R
 import com.example.freshbite.databinding.ActivityWelcomeBinding
 import com.example.freshbite.view.login.LoginActivity
 import com.example.freshbite.view.signup.SignupActivity

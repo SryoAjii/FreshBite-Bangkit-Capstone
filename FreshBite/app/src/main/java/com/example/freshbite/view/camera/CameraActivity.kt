@@ -3,13 +3,9 @@ package com.example.freshbite.view.camera
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.freshbite.R
 import com.example.freshbite.databinding.ActivityCameraBinding
 
 class CameraActivity : AppCompatActivity() {

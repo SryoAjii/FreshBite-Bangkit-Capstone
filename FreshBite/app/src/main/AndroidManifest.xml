@@ -17,6 +17,9 @@
         android:theme="@style/Theme.FreshBite"
         tools:targetApi="31">
         <activity
+            android:name=".view.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.camera.CameraActivity"
             android:exported="false" />
         <activity
@@ -61,7 +64,6 @@
                 android:name="photopicker_activity:0:required"
                 android:value="" />
         </service>
-
     </application>
 
 </manifest>

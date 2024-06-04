@@ -7,6 +7,7 @@ import com.example.freshbite.data.Repository
 import com.example.freshbite.di.Injection
 import com.example.freshbite.view.login.LoginViewModel
 import com.example.freshbite.view.main.MainViewModel
+import com.example.freshbite.view.profile.ProfileViewModel
 
 class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -17,6 +18,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
