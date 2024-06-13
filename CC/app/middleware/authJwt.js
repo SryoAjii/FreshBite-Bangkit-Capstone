@@ -3,7 +3,7 @@ const config = require("../config/authConfig.js");
 
 verifyToken = (req, res, next) => {
   let token = req.session.token;
-
+  
   console.log("Token from session:", token); 
 
   if (!token) {
@@ -20,7 +20,7 @@ verifyToken = (req, res, next) => {
       });
     }
     console.log("Decoded token ID:", decoded.id); 
-    req.userId = decoded.id;
+    req.user = decoded;
     next();
   });
 };

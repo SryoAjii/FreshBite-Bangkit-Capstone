@@ -1,9 +1,7 @@
 const db = require("../models");
 const config = require("../config/authConfig");
 const User = db.user;
-
 const Op = db.Sequelize.Op;
-
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -49,7 +47,7 @@ exports.signin = async (req, res) => {
     }
 
     console.log("Password is valid, signing token");
-    const token = jwt.sign({ id: user.id }, config.secret, {
+    const token = jwt.sign({ id: user.id, email: user.email }, config.secret, {
       expiresIn: 86400,
     });
 
@@ -68,11 +66,23 @@ exports.signin = async (req, res) => {
 
 exports.signout = async (req, res) => {
   try {
-    req.session = null;
+    console.log("User during signout:", req.user);
+    if (!req.user) {
+      return res.status(400).send({
+        message: "No user is currently signed in."
+      });
+    }
+
+    const user = req.user;
+    req.session = null; 
+
     return res.status(200).send({
-      message: "You've been signed out!"
+      message: `You have been signed out, ${user.email}!`
     });
   } catch (err) {
-    this.next(err);
+    res.status(500).send({
+      message: "An error occurred during sign out.",
+      error: err.message
+    });
   }
 };
