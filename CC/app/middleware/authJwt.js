@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/authConfig.js");
-const db = require("../models");
-const User = db.user;
 
 verifyToken = (req, res, next) => {
   let token = req.session.token;
+
+  console.log("Token from session:", token); 
 
   if (!token) {
     return res.status(403).send({
@@ -12,42 +12,20 @@ verifyToken = (req, res, next) => {
     });
   }
 
-  jwt.verify(token,
-             config.secret,
-             (err, decoded) => {
-              if (err) {
-                return res.status(401).send({
-                  message: "Unauthorized!",
-                });
-              }
-              req.userId = decoded.id;
-              next();
-             });
-};
-
-isAdmin = async (req, res, next) => {
-  try {
-    const user = await User.findByPk(req.userId);
-    const roles = await user.getRoles();
-
-    for (let i = 0; i < roles.length; i++) {
-      if (roles[i].name === "admin") {
-        return next();
-      }
+  jwt.verify(token, config.secret, (err, decoded) => {
+    if (err) {
+      console.log("Token verification error:", err); 
+      return res.status(401).send({
+        message: "Unauthorized!",
+      });
     }
-
-    return res.status(403).send({
-      message: "Require Admin Role!",
-    });
-  } catch (error) {
-    return res.status(500).send({
-      message: "Unable to validate User role!",
-    });
-  }
+    console.log("Decoded token ID:", decoded.id); 
+    req.userId = decoded.id;
+    next();
+  });
 };
 
 const authJwt = {
   verifyToken,
-  isAdmin,
 };
 module.exports = authJwt;

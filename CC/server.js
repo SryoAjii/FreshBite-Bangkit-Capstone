@@ -14,14 +14,14 @@ app.use(
   })
 );
 
+
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/article.routes')(app);
 
 const db = require("./app/models");
-const Role = db.role;
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync({force: false}).then(() => {
   console.log('Drop and Resync Db');
-  initial();
 });
 
 app.get("/", (req, res) => {
@@ -29,18 +29,6 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-
-function initial() {
-  Role.create({
-    id: 1,
-    name: "user"
-  });
-
-  Role.create({
-    id: 2,
-    name: "admin"
-  });
-}
