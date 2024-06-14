@@ -18,6 +18,7 @@ import com.example.freshbite.data.pref.UserModel
 import com.example.freshbite.databinding.ActivityLoginBinding
 import com.example.freshbite.view.ViewModelFactory
 import com.example.freshbite.view.main.MainActivity
+import com.example.freshbite.view.signup.SignupActivity
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> {
@@ -35,6 +36,10 @@ class LoginActivity : AppCompatActivity() {
         setupView()
         setupAction()
         playAnimation()
+
+        binding.textButton.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+        }
     }
 
     private fun passwordEdit() {
@@ -113,21 +118,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun playAnimation() {
-        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
-            duration = 6000
-            repeatCount = ObjectAnimator.INFINITE
-            repeatMode = ObjectAnimator.REVERSE
-        }.start()
-
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(100)
         val message =
             ObjectAnimator.ofFloat(binding.messageTextView, View.ALPHA, 1f).setDuration(100)
-        val emailTextView =
-            ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(100)
         val emailEditTextLayout =
             ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 1f).setDuration(100)
-        val passwordTextView =
-            ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 1f).setDuration(100)
         val passwordEditTextLayout =
             ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(100)
         val login = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(100)
@@ -136,9 +131,7 @@ class LoginActivity : AppCompatActivity() {
             playSequentially(
                 title,
                 message,
-                emailTextView,
                 emailEditTextLayout,
-                passwordTextView,
                 passwordEditTextLayout,
                 login
             )

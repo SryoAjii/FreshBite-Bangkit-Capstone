@@ -5,11 +5,11 @@
     <string name="welcome_description">Keep it Fresh with FreshBite!\n Your Fruit\'s Best Friend!</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
-    <string name="login_title">Sign In to Your Account</string>
+    <string name="login_title">Sign In to Your\n Account</string>
     <string name="login_message">Enter your email and password to login</string>
     <string name="no_account">Don\'t Have an Account?</string>
-    <string name="name">Name</string>
-    <string name="title_signup_page">Create Your Account</string>
+    <string name="username">Username</string>
+    <string name="title_signup_page">Create Your\n Account</string>
     <string name="signup_message">Already have an account?</string>
     <string name="logout">Log Out</string>
     <string name="email_error">Please enter a valid email</string>
