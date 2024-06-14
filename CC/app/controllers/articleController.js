@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op;
 
 exports.createArticle = async (req, res) => {
   try {
-    const { title, content, link, image } = req.body;
+    const { title, content, link,tag, image } = req.body;
 
     if (!title || !content) {
       return res.status(400).json({ message: "Title and content are required." });
@@ -14,6 +14,7 @@ exports.createArticle = async (req, res) => {
       title,
       content,
       link,
+      tag,
       image
     });
 
@@ -45,4 +46,34 @@ exports.getArticleById = async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
-  };
+};
+
+exports.searchArticle = async (req, res) => {
+  try {
+    const title = req.body.title;
+    const articles = await Article.findAll({where : {title: {[Op.like]: '%' + title + '%'}}});
+
+    if (articles.length === 0) {
+      return res.status(404).json({ message: "Article not found." });
+    } else {
+      res.status(200).json(articles);
+    } 
+  }catch (error) {
+    res.status(500).send({message: 'Error retrieving article with title=' + title});
+  }
+};
+
+exports.filterArticle = async (req, res) => {
+  try{
+    const tag = req.params.tag;
+    const articles = await Article.findAll({where: {tag: tag}});
+
+    if (articles.length === 0) {
+      return res.status(404).json({ message: "Article with this tag is not found." });
+    } else {
+      res.status(200).json(articles);
+    } 
+  }catch (error) {
+    res.status(500).send({message: 'Error retrieving article with tag=' + tag});
+  }
+};

@@ -15,11 +15,15 @@ module.exports = (sequelize, Sequelize) => {
       },
       link: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
+      },
+      tag: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       image: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       }
     });
   
