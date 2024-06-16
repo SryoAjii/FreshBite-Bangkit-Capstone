@@ -20,4 +20,6 @@
     <string name="freshbite">FreshBite.</string>
     <string name="profile">Profile</string>
     <string name="get_started">Get Started</string>
+    <string name="title">title</string>
+    <string name="description">description</string>
 </resources>

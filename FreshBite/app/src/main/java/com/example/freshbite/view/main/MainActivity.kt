@@ -30,10 +30,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.logoutButton.setOnClickListener {
-            viewModel.logout()
-        }
-
         binding.cameraPage.setOnClickListener {
             val intent = Intent(this@MainActivity, CameraActivity::class.java)
             startActivity(intent)
