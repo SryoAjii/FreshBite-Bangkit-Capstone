@@ -9,6 +9,7 @@
     android:background="?attr/colorSurface">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topAppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,6 +27,16 @@
             android:background="?attr/colorPrimary"/>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/wave"
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/waves_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topAppBarLayout"/>
 
     <TextView
         android:id="@+id/messageTextView"
@@ -57,7 +68,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
-        app:srcCompat="@drawable/baseline_image_search_24"
+        android:backgroundTint="?attr/colorTertiary"
+        app:srcCompat="@drawable/camera_icon"
+        app:maxImageSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

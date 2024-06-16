@@ -25,6 +25,10 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
 
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         binding.logoutButton.setOnClickListener { viewModel.logout() }
     }
 }
