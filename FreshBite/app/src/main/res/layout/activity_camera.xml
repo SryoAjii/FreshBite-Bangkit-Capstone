@@ -27,7 +27,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="4dp"
         android:text="@string/camera"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="?attr/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/galleryButton"
         app:layout_constraintBottom_toTopOf="@id/analyzeButton"/>
@@ -39,7 +39,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="4dp"
         android:text="@string/gallery"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="?attr/colorSecondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/cameraButton"
         app:layout_constraintBottom_toTopOf="@id/analyzeButton"/>
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:text="@string/analyze"
         android:layout_margin="32dp"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="?attr/colorSecondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
@@ -70,6 +70,24 @@
         android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/successButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="success"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontal2"/>
+
+    <Button
+        android:id="@+id/errorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="error"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/successButton"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

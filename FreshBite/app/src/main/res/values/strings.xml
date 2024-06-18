@@ -22,4 +22,92 @@
     <string name="get_started">Get Started</string>
     <string name="title">title</string>
     <string name="description">description</string>
+    <string name="fruit_benefit">fruit benefit</string>
+    <string name="result_fresh">Yeay! Buah anda segar dan siap dinikmati</string>
+    <string name="result_rotten">Oops! Sepertinya buah anda\n sudah tidak segar</string>
+    <string name="article_textview">Bosen makan buah gitu-gitu aja? Coba baca artikel di bawah ini!</string>
+
+    <string name="orange_benefit">
+        Tahukah Kamu, jeruk memiliki beberapa manfaat loh :\n\n
+        \u2022 Sumber vitamin C \n
+        \u2022 Meningkatkan kekebalan tubuh \n
+        \u2022 Mencegah penyakit ginjal \n
+        \u2022 Membantu melancarkan pencernaan \n
+        \u2022 Mengatur tekanan darah tinggi
+    </string>
+
+    <string name="apple_benefit">
+        Tahukah Kamu, apel memiliki beberapa manfaat loh :\n\n
+        \u2022 Menjaga kesehatan saluran pencernaan \n
+        \u2022 Menjaga kesehatan dan fungsi jantung \n
+        \u2022 Menurunkan resiko terkena diabetes \n
+        \u2022 Menjaga kesehatan otak \n
+        \u2022 Memperkuat imunitas tubuh
+    </string>
+
+    <string name="banana_benefits">
+        Tahukah Kamu, pisang memiliki beberapa manfaat loh :\n\n
+        \u2022 Mencegah serangan jantung \n
+        \u2022 Mencegah terjadinya kanker \n
+        \u2022 Mengurangi resiko terjadinya batu ginjal \n
+        \u2022 Mencegah sembelit \n
+        \u2022 Menurunkan berat badan
+    </string>
+
+    <string-array name="data_title">
+        <item>5 Cara Mengolah Buah Jeruk yang Bercita Rasa Asam, Gak Terbuang!</item>
+        <item>6 Resep Minuman Aneka Olahan Jeruk untuk Lebaran, Segar dan Mudah Dibuat</item>
+        <item>5 Resep Kreasi Jeruk yang Nggak Hanya Enak tapi Tetap Juga Sehat</item>
+
+        <item>6 Resep Camilan Serba Apel Cocok untuk Teman Santai</item>
+        <item>10 Resep olahan apel kekinian, unik, lezat, dan menyehatkan</item>
+        <item>7 Inspirasi Resep Olahan Apel yang Simple dan Praktis, Cocok Buat Takjil Buka Puasa!</item>
+
+        <item>15 Resep olahan pisang untuk jualan, enak, praktis dan bikin nagih</item>
+        <item>11 Aneka Olahan Pisang yang Enak dan Mudah Dibuat di Rumah</item>
+        <item>5 Resep Olahan Pisang yang Enak dan Tidak Eneg</item>
+    </string-array>
+
+    <string-array name="data_description">
+        <item>Lima cara membuat olahan dari buah jeruk asam pun dapat kamu jumpai berdasarkan artikel di bawah ini.</item>
+        <item>Minuman berbahan jeruk menjadi satu di antara banyak jenis minuman yang dapat menyegarkan tubuh, dinikmati dalam keadaan dingin atau hangat.</item>
+        <item>Jeruk, adalah salah satu varian buah yang mudah ditemukan dimana-mana dan hampir nggak musiman </item>
+
+        <item>Apel mungkin menjadi buah yang sangat mudah ditemui di pasar buah dengan harga dan jenis yang beraneka ragam. Apel tidak hanya bisa dimakan begitu saja, tapi juga bisa diolah menjadi berbagai macam camilan enak untuk keluarga.</item>
+        <item>Apel merupakan salah satu buah yang paling banyak dikonsumsi orang. Cara mengonsumsinya pun dalam berbagai cara, ada yang memakannya langsung, ada pula yang dijadikan jus.</item>
+        <item>Ada banyak resep olahan apel yang praktis untuk takjil buka puasa. Mulai dari olahan makanan hingga minuman. Jadi, apa saja resepnya? Intip disini!</item>
+
+        <item>Salah satu bahan yang bisa kamu olah jadi beragam masakan adalah pisang. Buah satu ini bisa kamu jadi aneka camilan hingga makanan berat. Selain rasanya yang manis, tekstur buah pisang juga nggak akan berubah jika diolah menjadi kreasi makanan.</item>
+        <item>Untuk kamu yang ingin mencoba memasak pisang tapi tidak ingin menu yang ribet dan sulit untuk pemula? Coba 11 aneka olahan pisang yang enak dan mudah dibuat dirumah ini.</item>
+        <item>Buah pisang menjadi salah satu buah yang memiliki segudang manfaat buat kesehatan. Buah pisang bisa dikonsumsi secara langsung saat matang. Tapi juga bisa diolah menjadi berbagai camilan yang enak, lezat dan pastinya tidak eneg. </item>
+    </string-array>
+
+    <string-array name="data_photo">
+        <item>https://cdn.idntimes.com/content-images/community/2023/11/img-20231129-120949-1cb7e0cc363c847209d1701620b246b7_600x400.jpg</item>
+        <item>https://cdn0-production-images-kly.akamaized.net/liTnKvsJw4Ny7VnnJbv-eoKs4SE=/640x360/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3191470/original/034088800_1595838074-glass-jar-with-lime-drink_23-2148602852.jpg</item>
+        <item>https://images.unsplash.com/photo-1582979512210-99b6a53386f9?q=80&amp;w=1974&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D</item>
+
+        <item>https://cdn1-production-images-kly.akamaized.net/wsGwA9MtSg8Dpa19RCo9tbpxG0g=/0x375:4800x3080/680x383/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2887138/original/009309400_1566288509-shutterstock_407210341.jpg</item>
+        <item>https://cdn-brilio-net.akamaized.net/webp/news/2020/10/06/193293/10-resep-olahan-apel-kekinian-unik-lezat-dan-menyehatkan-201006h.jpg</item>
+        <item>https://peaujeunebeaute.com/media/blog/ori/57.png</item>
+
+        <item>https://cdn-brilio-net.akamaized.net/webp/news/2022/05/13/229386/15-resep-olahan-pisang-untuk-jualan-enak-praktis-dan-bikin-nagih-2205133.jpg</item>
+        <item>https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?q=80&amp;w=2080&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D</item>
+        <item>https://cdn0-production-images-kly.akamaized.net/fJJqst_7kXmvIWq3FgpV4m7JNrQ=/680x383/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4111012/original/084050100_1659454084-eiliv-sonas-aceron-k9X5yGle-NA-unsplash.jpg</item>
+    </string-array>
+
+    <string-array name="data_url">
+        <item>https://www.idntimes.com/food/diet/intan-5/cara-mengolah-buah-jeruk-c1c2?page=all</item>
+        <item>https://www.bola.com/ragam/read/4556763/6-resep-minuman-aneka-olahan-jeruk-untuk-lebaran-segar-dan-mudah-dibuat</item>
+        <item>https://www.sayurbox.com/blog/5-resep-kreasi-jeruk-yang-nggak-hanya-enak-tapi-tetap-juga-sehat</item>
+
+        <item>https://www.fimela.com/food/read/4655671/6-resep-camilan-serba-apel-cocok-untuk-teman-santai</item>
+        <item>https://www.briliofood.net/resep/10-resep-olahan-apel-kekinian-unik-lezat-dan-menyehatkan-201006h.html</item>
+        <item>https://peaujeunebeaute.com/article?link=7-Inspirasi-Resep-Olahan-Apel-yang-Simple-dan-Praktis-Cocok-Buat-Takjil-Buka-Puasa!-092932</item>
+
+        <item>https://www.briliofood.net/resep/15-resep-olahan-pisang-untuk-jualan-enak-praktis-dan-bikin-nagih-2205133.html</item>
+        <item>https://www.sayurbox.com/blog/11-aneka-olahan-pisang-yang-enak</item>
+        <item>https://www.fimela.com/food/read/5082451/5-resep-olahan-pisang-yang-enak-dan-tidak-eneg</item>
+    </string-array>
+
 </resources>
