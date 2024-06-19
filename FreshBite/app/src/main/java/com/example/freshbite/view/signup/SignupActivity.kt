@@ -10,14 +10,21 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.freshbite.R
 import com.example.freshbite.databinding.ActivitySignupBinding
+import com.example.freshbite.di.StateResult
+import com.example.freshbite.view.ViewModelFactory
 import com.example.freshbite.view.login.LoginActivity
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
+    private val viewModel by viewModels<SignupViewModel>{
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,16 +100,47 @@ class SignupActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.signupButton.setOnClickListener {
-            AlertDialog.Builder(this).apply {
-                setTitle("Yeah!")
-                setMessage("Your Account is set! Login now")
-                setPositiveButton("Continue") { _, _ ->
-                    finish()
+            val name  = binding.nameEditText.text.toString()
+            val email = binding.emailEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+            viewModel.userRegister(name, email, password).observe(this) { result ->
+                if (result != null) {
+                    when (result) {
+                        is StateResult.Loading -> {
+                            loading(true)
+                        }
+                        is StateResult.Success -> {
+                            result.data.message?.let { it1 -> toast(it1) }
+                            loading(false)
+                            AlertDialog.Builder(this).apply {
+                                setTitle("Yeah!")
+                                setMessage("User dengan email $email sudah jadi nih. Yuk, login sekarang.")
+                                setPositiveButton("Login") { _, _ ->
+                                    val intent = Intent(context, LoginActivity::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                    startActivity(intent)
+                                    finish()
+                                }
+                                create()
+                                show()
+                            }
+                        }
+                        is StateResult.Error -> {
+                            toast(result.error)
+                            loading(false)
+                        }
+                    }
                 }
-                create()
-                show()
             }
         }
+    }
+
+    private fun loading(loading: Boolean) {
+        binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
+    }
+
+    private fun toast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun playAnimation() {

@@ -2,10 +2,15 @@ package com.example.freshbite.view.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.freshbite.R
 import com.example.freshbite.databinding.ActivityMainBinding
+import com.example.freshbite.di.StateResult
+import com.example.freshbite.retrofit.response.ArticlesResponseItem
 import com.example.freshbite.view.ViewModelFactory
 import com.example.freshbite.view.camera.CameraActivity
 import com.example.freshbite.view.profile.ProfileActivity
@@ -30,6 +35,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.getArticles().observe(this) { result ->
+            if (result != null) {
+                when (result) {
+                    is StateResult.Loading -> {
+                        loading(true)
+                    }
+                    is StateResult.Success -> {
+                        loading(false)
+                        setArticle(result.data)
+                    }
+                    is StateResult.Error -> {
+                        loading(false)
+                    }
+                }
+            }
+        }
+
         binding.cameraPage.setOnClickListener {
             val intent = Intent(this@MainActivity, CameraActivity::class.java)
             startActivity(intent)
@@ -45,5 +67,16 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    private fun setArticle(article: List<ArticlesResponseItem>) {
+        val adapter = MainAdapter()
+        adapter.submitList(article)
+        binding.articleList.layoutManager = LinearLayoutManager(this)
+        binding.articleList.adapter = adapter
+    }
+
+    private fun loading(loading: Boolean) {
+        binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
     }
 }

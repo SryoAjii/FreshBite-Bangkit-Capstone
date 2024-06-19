@@ -10,12 +10,16 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.freshbite.R
 import com.example.freshbite.data.pref.UserModel
 import com.example.freshbite.databinding.ActivityLoginBinding
+import com.example.freshbite.di.Injection
+import com.example.freshbite.di.StateResult
+import com.example.freshbite.retrofit.api.ApiConfig
 import com.example.freshbite.view.ViewModelFactory
 import com.example.freshbite.view.main.MainActivity
 import com.example.freshbite.view.signup.SignupActivity
@@ -101,18 +105,28 @@ class LoginActivity : AppCompatActivity() {
     private fun setupAction() {
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
-            viewModel.saveSession(UserModel(email, "sample_token"))
-            AlertDialog.Builder(this).apply {
-                setTitle("Yeah!")
-                setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
-                setPositiveButton("Lanjut") { _, _ ->
-                    val intent = Intent(context, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
+            val password = binding.passwordEditText.text.toString()
+            viewModel.userLogin(email, password).observe(this) { result ->
+                if (result != null) {
+                    when (result) {
+                        is StateResult.Loading -> {
+                            loading(true)
+                        }
+                        is StateResult.Success -> {
+                            loading(false)
+                            viewModel.saveSession(UserModel(email, result.data.accessToken.toString()))
+                            val repository = Injection.provideRepository(applicationContext)
+                            repository.getToken(ApiConfig.getApiService(result.data.accessToken.toString()))
+                            result.data.message?.let { it1 -> toast(it1) }
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                        is StateResult.Error -> {
+                            loading(false)
+                            toast(result.error)
+                        }
+                    }
                 }
-                create()
-                show()
             }
         }
     }
@@ -137,6 +151,14 @@ class LoginActivity : AppCompatActivity() {
             )
             startDelay = 100
         }.start()
+    }
+
+    private fun toast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun loading(loading: Boolean) {
+        binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
     }
 
 }

@@ -16,6 +16,9 @@ data class ArticlesResponseItem(
     @field:SerializedName("id")
     val id: Int? = null,
 
+    @field:SerializedName("tag")
+    val tag: String? = null,
+
     @field:SerializedName("title")
     val title: String? = null,
 

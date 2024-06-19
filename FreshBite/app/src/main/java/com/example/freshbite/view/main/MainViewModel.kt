@@ -14,10 +14,4 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun getArticles() = repository.getArticles()
-
-    fun logout() {
-        viewModelScope.launch {
-            repository.logout()
-        }
-    }
 }
