@@ -9,27 +9,33 @@
     android:background="?attr/colorSurface">
 
     <ImageView
-        android:id="@+id/oval"
+        android:id="@+id/welcome_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineHorizontal2"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineHorizontal2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/rectangle" />
+        app:srcCompat="@drawable/welcome_bg" />
 
-    <TextView
-        android:id="@+id/AppTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/freshbite"
-        android:textSize="58sp"
-        android:textStyle="bold"
-        android:textColor="?attr/colorSurface"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/guidelineHorizontal2"/>
+        app:srcCompat="@drawable/freshbite_logo_v2"/>
+
+    <ImageView
+        android:id="@+id/fruit_splash"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineHorizontal2"
+        app:srcCompat="@drawable/fruit_splash"/>
 
     <TextView
         android:id="@+id/descTextView"
@@ -53,33 +59,16 @@
         android:id="@+id/loginButton"
         android:layout_width="156dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="58dp"
         android:layout_marginEnd="16dp"
         android:alpha="0"
-        android:backgroundTint="?attr/colorPrimary"
-        android:text="@string/login"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
+        android:backgroundTint="?attr/colorSecondary"
+        android:text="@string/get_started"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descTextView"
         tools:alpha="100" />
-
-    <Button
-        android:id="@+id/signupButton"
-        android:layout_width="156dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="58dp"
-        android:layout_marginEnd="32dp"
-        android:alpha="0"
-        android:backgroundTint="?attr/colorPrimary"
-        android:text="@string/signup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
-        app:layout_constraintTop_toBottomOf="@+id/descTextView"
-        tools:alpha="100" />
-
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHorizontal"
@@ -87,7 +76,7 @@
         android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintGuide_percent="0.74"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -96,7 +85,7 @@
         android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.35"
+        app:layout_constraintGuide_percent="0.70"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
