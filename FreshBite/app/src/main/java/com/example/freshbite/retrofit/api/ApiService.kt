@@ -29,6 +29,12 @@ interface ApiService {
     @GET("api/articles")
     suspend fun getArticles(): List<ArticlesResponseItem>
 
+    @FormUrlEncoded
+    @POST("api/articles/search")
+    suspend fun searchArticle(
+        @Field("title") title: String
+    ): List<ArticlesResponseItem>
+
     @POST("api/auth/signout")
     suspend fun Logout(): LogoutResponse
 }

@@ -65,6 +65,16 @@ class Repository private constructor(
         }
     }
 
+    fun searchArticles(title: String) = liveData {
+        emit(StateResult.Loading)
+        try {
+            val responseSuccess = apiService.searchArticle(title)
+            emit(StateResult.Success(responseSuccess))
+        } catch (e: HttpException) {
+            emit(StateResult.Error("error"))
+        }
+    }
+
     fun getArticles() = liveData {
         emit(StateResult.Loading)
         try {

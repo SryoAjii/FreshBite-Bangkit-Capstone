@@ -39,6 +39,38 @@
         app:layout_constraintTop_toBottomOf="@+id/topAppBarLayout"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/filterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabCustomSize="50dp"
+        android:layout_marginBottom="64dp"
+        android:layout_marginEnd="24dp"
+        app:maxImageSize="24dp"
+        app:srcCompat="@drawable/icon_filter"
+        app:tint="@color/white"
+        android:backgroundTint="@color/green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/searchEditText"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"/>
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/edit_text_bg"
+        android:inputType="text"
+        android:layout_marginStart="24dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/baseline_search_24"
+        android:hint="@string/cari_artikel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/filterButton"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/cameraPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -13,5 +13,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         return repository.getSession().asLiveData()
     }
 
+    fun searchArticles(title: String) = repository.searchArticles(title)
+
     fun getArticles() = repository.getArticles()
 }

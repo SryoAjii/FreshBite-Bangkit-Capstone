@@ -52,6 +52,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        with(binding) {
+            searchEditText.setOnEditorActionListener{ _, _, _, ->
+                val search = searchEditText.text.toString()
+                searchEditText.hint = search
+                searchArticle(search)
+                Toast.makeText(this@MainActivity, searchEditText.text, Toast.LENGTH_SHORT).show()
+                false
+            }
+        }
+
         binding.cameraPage.setOnClickListener {
             val intent = Intent(this@MainActivity, CameraActivity::class.java)
             startActivity(intent)
@@ -65,6 +75,25 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 else -> false
+            }
+        }
+    }
+
+    private fun searchArticle(title: String) {
+        viewModel.searchArticles(title).observe(this) { result ->
+            if (result != null) {
+                when (result) {
+                    is StateResult.Loading -> {
+                        loading(true)
+                    }
+                    is StateResult.Success -> {
+                        loading(false)
+                        setArticle(result.data)
+                    }
+                    is StateResult.Error -> {
+                        loading(false)
+                    }
+                }
             }
         }
     }

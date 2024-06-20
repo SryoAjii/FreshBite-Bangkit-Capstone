@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FreshBite</string>
+    <string name="app_name"><b>FreshBite</b></string>
     <string name="login">Log In</string>
     <string name="signup">Sign Up</string>
     <string name="welcome_description">Keep it Fresh with FreshBite!\n Your Fruit\'s Best Friend!</string>
@@ -53,6 +53,7 @@
         \u2022 Mencegah sembelit \n
         \u2022 Menurunkan berat badan
     </string>
+    <string name="cari_artikel">Cari Artikel...</string>
 
     <string-array name="data_title">
         <item>5 Cara Mengolah Buah Jeruk yang Bercita Rasa Asam, Gak Terbuang!</item>
