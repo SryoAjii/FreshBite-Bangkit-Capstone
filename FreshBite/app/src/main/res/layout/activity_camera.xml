@@ -64,30 +64,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintGuide_percent="0.05" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:elevation="16dp"
+        android:indeterminateTint="?attr/colorSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHorizontal2"
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
-
-    <Button
-        android:id="@+id/successButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="success"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontal2"/>
-
-    <Button
-        android:id="@+id/errorButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="error"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/successButton"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

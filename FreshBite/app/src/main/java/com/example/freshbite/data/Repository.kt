@@ -7,6 +7,7 @@ import com.example.freshbite.di.StateResult
 import com.example.freshbite.retrofit.api.ApiService
 import com.example.freshbite.retrofit.response.LoginResponse
 import com.example.freshbite.retrofit.response.LogoutResponse
+import com.example.freshbite.retrofit.response.PredictResponse
 import com.example.freshbite.retrofit.response.RegisterResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
@@ -39,7 +40,6 @@ class Repository private constructor(
             emit(responseError.message?.let { StateResult.Error(it) })
         }
     }
-
 
     fun userLogin(email: String, password: String) = liveData {
         emit(StateResult.Loading)

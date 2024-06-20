@@ -3,11 +3,15 @@ package com.example.freshbite.retrofit.api
 import com.example.freshbite.retrofit.response.ArticlesResponseItem
 import com.example.freshbite.retrofit.response.LoginResponse
 import com.example.freshbite.retrofit.response.LogoutResponse
+import com.example.freshbite.retrofit.response.PredictResponse
 import com.example.freshbite.retrofit.response.RegisterResponse
+import okhttp3.MultipartBody
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 interface ApiService {
 
@@ -37,4 +41,10 @@ interface ApiService {
 
     @POST("api/auth/signout")
     suspend fun Logout(): LogoutResponse
+
+    @Multipart
+    @POST("api/predict")
+    suspend fun uploadImage(
+        @Part file: MultipartBody.Part
+    ) : PredictResponse
 }

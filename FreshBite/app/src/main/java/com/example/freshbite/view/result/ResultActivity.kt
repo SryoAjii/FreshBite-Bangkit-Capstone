@@ -21,32 +21,44 @@ class ResultActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.resultArticle.layoutManager = layoutManager
 
-        val fruit = intent.getStringExtra("EXTRA_NAME")
-        val result = intent.getStringExtra("EXTRA_RESULT")
+        val fruit = intent.getStringExtra("EXTRA_FRUIT")
 
-        if (result == "fresh") {
+        if (fruit != null) {
             binding.resultAnimation.setAnimation(R.raw.success)
             binding.resultAnimation.repeatCount = LottieDrawable.INFINITE
             binding.resultText.text = getText(R.string.result_fresh)
-            if (fruit != null) {
-                getBenefit(fruit)
-                list.addAll(getArticleList(fruit))
-                showRecycleList()
+            when (fruit) {
+                "freshoranges" -> {
+                    getBenefit(fruit)
+                    list.addAll(getArticleList(fruit))
+                    showRecycleList()
+                }
+                "freshapple" -> {
+                    getBenefit(fruit)
+                    list.addAll(getArticleList(fruit))
+                    showRecycleList()
+                }
+                "freshbanana" -> {
+                    getBenefit(fruit)
+                    list.addAll(getArticleList(fruit))
+                    showRecycleList()
+                }
+                else -> {
+                    binding.resultAnimation.setAnimation(R.raw.error)
+                    binding.resultText.text = getText(R.string.result_rotten)
+                    binding.fruitBenefitCardView.visibility = View.GONE
+                    binding.resultArticleCardView.visibility = View.GONE
+                    binding.articleTextview.visibility = View.GONE
+                }
             }
-        } else {
-            binding.resultAnimation.setAnimation(R.raw.error)
-            binding.resultText.text = getText(R.string.result_rotten)
-            binding.fruitBenefitCardView.visibility = View.GONE
-            binding.resultArticleCardView.visibility = View.GONE
-            binding.articleTextview.visibility = View.GONE
         }
     }
 
     private fun getBenefit(fruit: String) {
         when (fruit) {
-            "orange" -> binding.fruitBenefit.text = getText(R.string.orange_benefit)
-            "apple" -> binding.fruitBenefit.text = getText(R.string.apple_benefit)
-            "banana" -> binding.fruitBenefit.text = getText(R.string.banana_benefits)
+            "freshoranges" -> binding.fruitBenefit.text = getText(R.string.orange_benefit)
+            "freshapple" -> binding.fruitBenefit.text = getText(R.string.apple_benefit)
+            "freshbanana" -> binding.fruitBenefit.text = getText(R.string.banana_benefits)
         }
     }
 
@@ -58,9 +70,9 @@ class ResultActivity : AppCompatActivity() {
         val listArticle = ArrayList<ResultArticle>()
 
         val indices = when (fruit) {
-            "orange" -> 0..2
-            "apple" -> 3..5
-            "banana" -> 6..8
+            "freshoranges" -> 0..2
+            "freshapple" -> 3..5
+            "freshbanana" -> 6..8
             else -> return listArticle
         }
 
