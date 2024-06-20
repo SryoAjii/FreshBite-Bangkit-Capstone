@@ -1,5 +1,7 @@
 package com.example.freshbite.view.main
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -20,6 +22,11 @@ class MainAdapter: ListAdapter<ArticlesResponseItem, MainAdapter.MyViewHolder>(D
             Glide.with(itemView.context)
                 .load(article.image)
                 .into(image)
+            itemView.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(article.link)
+                itemView.context.startActivity(intent)
+            }
         }
     }
 

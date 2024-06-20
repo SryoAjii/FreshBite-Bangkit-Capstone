@@ -52,6 +52,10 @@ class ResultActivity : AppCompatActivity() {
                 }
             }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun getBenefit(fruit: String) {

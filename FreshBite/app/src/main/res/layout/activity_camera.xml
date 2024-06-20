@@ -8,6 +8,35 @@
     tools:context=".view.camera.CameraActivity"
     android:background="?attr/colorSurface">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/back_icon"
+            android:minHeight="?attr/actionBarSize"
+            app:titleTextColor="?attr/colorOnPrimary"
+            android:background="?attr/colorPrimary"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/wave"
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/waves_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topAppBarLayout"/>
+
     <ImageView
         android:id="@+id/cameraImageView"
         android:layout_width="0dp"
@@ -16,7 +45,7 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guidelineHorizontal"
+        app:layout_constraintTop_toBottomOf="@+id/topAppBarLayout"
         app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal2"
         app:srcCompat="@drawable/fruit_basket_image"/>
 
@@ -54,15 +83,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintGuide_percent="0.05" />
 
     <ProgressBar
         android:id="@+id/progressBar"

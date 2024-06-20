@@ -44,6 +44,10 @@ class CameraActivity : AppCompatActivity() {
                 binding.analyzeButton.setOnClickListener { analyzeImage(token) }
             }
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun analyzeImage(token: String) {
