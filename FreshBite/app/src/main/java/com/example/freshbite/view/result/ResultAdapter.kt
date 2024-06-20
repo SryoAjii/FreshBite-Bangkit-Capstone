@@ -10,7 +10,7 @@ import com.example.freshbite.databinding.ResultArticleItemBinding
 
 class ResultAdapter(private val listArticle: ArrayList<ResultArticle>): RecyclerView.Adapter<ResultAdapter.ListViewHolder>() {
 
-    inner class ListViewHolder(val binding: ResultArticleItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ListViewHolder(binding: ResultArticleItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val imgPhoto = binding.imgItemPhoto
         val itemTitle = binding.tvItemName
         val itemDescription = binding.tvItemDescription

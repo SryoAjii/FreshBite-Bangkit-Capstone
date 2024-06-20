@@ -15,6 +15,7 @@ import com.example.freshbite.view.ViewModelFactory
 import com.example.freshbite.view.camera.CameraActivity
 import com.example.freshbite.view.profile.ProfileActivity
 import com.example.freshbite.view.welcome.WelcomeActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(this)
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +80,34 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        binding.filterButton.setOnClickListener { showRadioButtonDialog() }
+        viewModel.newsItem.observe(this) { articles ->
+            setArticle(articles)
+        }
+    }
+
+    private fun showRadioButtonDialog() {
+        val items = arrayOf("jeruk", "apel", "pisang", "tidak ada")
+        var selectedItemIndex = 3
+
+        val builder = MaterialAlertDialogBuilder(this)
+            .setTitle("Pilih Buah untuk Memfilter Artikel")
+            .setSingleChoiceItems(items, selectedItemIndex) { dialog, which ->
+                selectedItemIndex = which
+            }
+            .setPositiveButton("OK") { dialog, which ->
+                val selectedFruit = items[selectedItemIndex]
+                filterArticles(selectedFruit)
+            }
+            .setNegativeButton("Batalkan", null)
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    private fun filterArticles(tag: String) {
+        viewModel.filterArticlesByTag(tag)
     }
 
     private fun searchArticle(title: String) {
