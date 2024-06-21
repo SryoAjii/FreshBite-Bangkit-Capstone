@@ -1,6 +1,9 @@
 
 # FreshBite App
 
+<img src="https://github.com/SryoAjii/FreshBite-Bangkit-Capstone/assets/127808055/0ec03283-4cfc-431d-9fd8-6b055f789d52" alt="splashScreen" width="200"/>
+<img src="https://github.com/SryoAjii/FreshBite-Bangkit-Capstone/assets/127808055/ffa65dba-1b1e-4dac-a24a-cafc3b9255b6" alt="splashScreen" width="200"/>
+
 FreshBite is an innovative mobile application designed to help users detect whether the fruits they have are fresh or rotten. Using advanced machine learning technology, FreshBite can analyze the condition of fruits based on visual and other sensory data, providing accurate predictions of fruit freshness.
 
 ## Features
@@ -8,6 +11,22 @@ FreshBite is an innovative mobile application designed to help users detect whet
 - Authentication
 - Fruit Detection
 - Articles
+
+## Android Minimum Requirements
+
+- Android Studio Iguana
+- Android 7.0 Nougat
+
+## Android Library Used
+
+| Library | Usage |
+| :-------- | :------- |
+| OkHttp | An HTTP client that supports HTTP/2 and allows for efficient network calls on Android. |
+| Retrofit | A type-safe HTTP client for Android and Java that simplifies making network requests. |
+| LifeCycle | Provides lifecycle-aware components to help manage activity and fragment lifecycles. |
+| DataStore | A modern data storage solution to store key-value pairs or serialized objects asynchronously. |
+| Lottie | Renders Adobe After Effects animations natively in real-time with minimal code. |
+| Glide | A fast and efficient image loading library for Android that supports fetching, resizing, and displaying images seamlessly. |
 
 ## API Reference
 
