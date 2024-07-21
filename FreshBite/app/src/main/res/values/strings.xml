@@ -26,6 +26,88 @@
     <string name="result_fresh">Yeay! Buah anda segar dan siap dinikmati</string>
     <string name="result_rotten">Oops! Sepertinya buah anda\n sudah tidak segar</string>
     <string name="article_textview">Bosen makan buah gitu-gitu aja? Coba baca artikel di bawah ini!</string>
+    <string name="tanggal">tanggal</string>
+    <string name="klasifikasi">Klasifikasi</string>
+    <string name="History">History</string>
+    <string name="Informasi">Informasi</string>
+
+    <string name="tab_jeruk">Jeruk</string>
+    <string name="tab_apel">Apel</string>
+    <string name="tab_pisang">Pisang</string>
+
+    <string name="jeruk_segar">Jeruk Segar</string>
+    <string name="apel_segar">Apel Segar</string>
+    <string name="pisang_segar">Pisang Segar</string>
+
+    <string name="jeruk_busuk">Jeruk Busuk</string>
+    <string name="apel_busuk">Apel Busuk</string>
+    <string name="pisang_busuk">Pisang Busuk</string>
+
+    <string name="info_jeruk_segar">
+        Warna Kulit:
+        \nJeruk segar biasanya memiliki warna kulit yang cerah dan seragam. Tergantung pada jenis jeruk, warna kulit bisa oranye cerah, hijau kekuningan, atau kuning keemasan. Kulitnya biasanya mengkilap dan tidak kusam
+        \n\nTekstur Kulit:
+        \nKulit jeruk segar terasa halus dan sedikit kenyal saat ditekan lembut. Tidak ada bercak lembut atau bagian yang terlalu lunak.
+        \n\n Aroma:
+        \nJeruk segar memiliki aroma yang harum dan manis. Aroma ini bisa tercium dengan jelas ketika kulitnya dipegang atau sedikit digesek.
+        \n\n Berat:
+        \nJeruk segar terasa lebih berat dibandingkan ukurannya, yang menandakan kandungan air yang tinggi dan daging buah yang segar.
+    </string>
+
+    <string name="info_apel_segar">
+        Kulit Apel:
+        \nKulit apel segar halus, tidak keriput, dan berwarna cerah. Warna bisa bervariasi tergantung varietas apel, tetapi tetap terlihat segar.
+        \n\nTekstur:
+        \nApel segar memiliki tekstur yang terasa keras saat ditekan,tidak lembek, dan tidak memiliki bintik-bintik cokelat atau noda hitam pada kulit.
+        \n\nAroma:
+        \nApel segar memiliki aroma yang segar dan wangi khas buah apel.
+        \n\nRasa:
+        \nApel segar memiliki rasa yang manis atau sedikit asam, tergantung pada jenis apel.
+    </string>
+
+    <string name="info_pisang_segar">
+        Warna Kulit:
+        \nPisang segar memiliki kulit yang berwarna kuning cerah, beberapa jenis pisang mungkin memiliki sedikit warna hijau di ujungnya yang menandakan bahwa pisang sedikit mentah.
+        \n\nTekstur Kulit:
+        \nKulit pisang segar terasa halus dan sedikit kenyal saat ditekan lembut, kulitnya mudah dikupas dan tidak ada bagian yang lembek atau rusak.
+        \n\nAroma:
+        \nPisang segar memiliki aroma yang manis dan harum. Aroma ini bisa tercium dengan jelas.
+        \n\nKonsistensi Daging Buah:
+        \nDaging buah pisang terasa lembut namun tetap kokoh dan tidak lembek. Pisang segar memiliki rasa manis dan tekstur yang lembut saat digigit.
+    </string>
+
+    <string name="info_jeruk_busuk">
+        Warna Kulit:
+        \nJeruk busuk bisa memiliki warna kulit yang kusam atau terdapat bercak-bercak cokelat, hitam, atau hijau seperti jamur.
+        \n\nTekstur Kulit:
+        \nKulit jeruk busuk biasanya terasa lembek dan mungkin ada bagian yang terlalu lunak atau lembek saat ditekan.
+        \n\n Aroma:
+        \nJeruk busuk memiliki aroma yang tidak sedap, sering kali tercium asam atau bahkan seperti bau fermentasi. Aroma yang tidak menyenangkan ini bisa tercium jelas tanpa menyentuh kulitnya.
+        \n\n Berat:
+        \nJeruk terasa lebih ringan dibandingkan ukurannya, menandakan bahwa sebagian besar air dan daging buah sudah hilang atau membusuk.
+    </string>
+
+    <string name="info_apel_busuk">
+        Kulit Apel:
+        \nApel busuk memiliki kulit yang terlihat keriput dan kusam, seringkali dengan bintik-bintik cokelat atau noda hitam.
+        \n\nTekstur:
+        \nApel busuk memiliki tekstur yang terasa lembek ketika ditekan, bisa ada bagian yang lunak atau berair.
+        \n\nAroma:
+        \nApel busuk memiliki aroma yang tidak sedap dan memiliki bau fermentasi.
+        \n\nRasa:
+        \nApel busuk memiliki rasa yang pahit atau asam tidak enak, terkadang rasa fermentasi.
+    </string>
+
+    <string name="info_pisang_busuk">
+        Warna Kulit:
+        \nPisang busuk memiliki kulit yang berwarna cokelat gelap atau hitam dengan banyak bercak.
+        \n\nTekstur Kulit:
+        \nKulit pisang busuk terasa lembek dan mungkin ada bagian yang terlalu lunak atau rusak saat ditekan.
+        \n\nAroma:
+        \nAroma pisang busuk tidak sedap dan sering kali tercium asam atau bahkan seperti bau fermentasi.
+        \n\nKonsistensi Daging Buah:
+        \nDaging buah pisang busuk terasa sangat lembek dan mungkin berair atau berlendir. Rasanya cenderung asam atau pahit, dan teksturnya tidak lagi enak untuk dimakan.
+    </string>
 
     <string name="orange_benefit">
         Tahukah Kamu, jeruk memiliki beberapa manfaat loh :\n\n

@@ -13,6 +13,9 @@ import com.example.freshbite.di.StateResult
 import com.example.freshbite.retrofit.response.ArticlesResponseItem
 import com.example.freshbite.view.ViewModelFactory
 import com.example.freshbite.view.camera.CameraActivity
+import com.example.freshbite.view.history.HistoryActivity
+import com.example.freshbite.view.history.HistoryAdapter
+import com.example.freshbite.view.info.InfoActivity
 import com.example.freshbite.view.profile.ProfileActivity
 import com.example.freshbite.view.welcome.WelcomeActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -84,6 +87,14 @@ class MainActivity : AppCompatActivity() {
         binding.filterButton.setOnClickListener { showRadioButtonDialog() }
         viewModel.newsItem.observe(this) { articles ->
             setArticle(articles)
+        }
+
+        binding.infoButton.setOnClickListener {
+            startActivity(Intent(this@MainActivity, InfoActivity::class.java))
+        }
+
+        binding.historyButton.setOnClickListener {
+            startActivity(Intent(this@MainActivity, HistoryActivity::class.java))
         }
     }
 
