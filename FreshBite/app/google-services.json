@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "646888068700",
+    "project_id": "freshbite-5d4a7",
+    "storage_bucket": "freshbite-5d4a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646888068700:android:90960838e338e021b13899",
+        "android_client_info": {
+          "package_name": "com.example.freshbite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrEx8XMKf9YTHdSv2wqP3TRHTb26TW3xA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -49,6 +49,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topAppBarLayout"
         app:layout_constraintBottom_toBottomOf="@id/guidelineHorizontal"/>
+
+    <TextView
+        android:id="@+id/resultLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/jeruk_segar"
+        android:background="@drawable/green_bg"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontal"/>
     
     <TextView
         android:id="@+id/resultText"
@@ -58,9 +71,10 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="18sp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontal"/>
+        app:layout_constraintTop_toBottomOf="@+id/resultLabel"/>
     
     <androidx.cardview.widget.CardView
         android:id="@+id/fruitBenefitCardView"
@@ -69,7 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/resultText"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:cardCornerRadius="8dp"

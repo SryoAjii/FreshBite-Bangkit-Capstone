@@ -22,6 +22,7 @@ class ResultActivity : AppCompatActivity() {
         binding.resultArticle.layoutManager = layoutManager
 
         val fruit = intent.getStringExtra("EXTRA_FRUIT")
+        val score = intent.getDoubleExtra("EXTRA_SCORE", 0.0)
 
         if (fruit != null) {
             binding.resultAnimation.setAnimation(R.raw.success)
@@ -30,16 +31,19 @@ class ResultActivity : AppCompatActivity() {
             when (fruit) {
                 "freshoranges" -> {
                     getBenefit(fruit)
+                    binding.resultLabel.text = "Jeruk Segar ${score.toInt()}%"
                     list.addAll(getArticleList(fruit))
                     showRecycleList()
                 }
                 "freshapple" -> {
                     getBenefit(fruit)
+                    binding.resultLabel.text = "Apel Segar ${score.toInt()}%"
                     list.addAll(getArticleList(fruit))
                     showRecycleList()
                 }
                 "freshbanana" -> {
                     getBenefit(fruit)
+                    binding.resultLabel.text = "Pisang Segar ${score.toInt()}%"
                     list.addAll(getArticleList(fruit))
                     showRecycleList()
                 }
@@ -49,6 +53,12 @@ class ResultActivity : AppCompatActivity() {
                     binding.fruitBenefitCardView.visibility = View.GONE
                     binding.resultArticleCardView.visibility = View.GONE
                     binding.articleTextview.visibility = View.GONE
+                    binding.resultLabel.setBackgroundResource(R.drawable.red_bg)
+                    when (fruit) {
+                        "rottenapples" -> binding.resultLabel.text = "Apel Busuk ${score.toInt()}%"
+                        "rottenoranges" -> binding.resultLabel.text = "Jeruk Busuk ${score.toInt()}%"
+                        "rottenbananas" -> binding.resultLabel.text = "Pisang Busuk ${score.toInt()}%"
+                    }
                 }
             }
         }
