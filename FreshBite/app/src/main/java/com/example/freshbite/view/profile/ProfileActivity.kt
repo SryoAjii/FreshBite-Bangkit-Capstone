@@ -1,7 +1,6 @@
 package com.example.freshbite.view.profile
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -29,9 +28,24 @@ class ProfileActivity : AppCompatActivity() {
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             }
-            if (user.email.isNotEmpty()) {
-                val email = user.email
-                binding.userEmail.text = email
+        }
+
+        viewModel.getUserDetail().observe(this) { result ->
+            if (result != null) {
+                when (result) {
+                    is StateResult.Loading -> {
+                        loading(true)
+                    }
+                    is StateResult.Success -> {
+                        binding.userEmail.text = result.data.first
+                        binding.userName.text = result.data.second
+                        loading(false)
+                    }
+                    is StateResult.Error -> {
+                        toast(result.error)
+                        loading(false)
+                    }
+                }
             }
         }
 
@@ -44,7 +58,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun userLogout() {
         viewModel.logout()
-        viewModel.userLogout().observe(this) { result ->
+        viewModel.firebaseLogout().observe(this) { result ->
             if (result != null) {
                 when (result) {
                     is StateResult.Loading -> {
@@ -52,7 +66,7 @@ class ProfileActivity : AppCompatActivity() {
                     }
                     is StateResult.Success -> {
                         loading(false)
-                        result.data.message?.let { it1 -> toast(it1) }
+                        toast("Logout Berhasil")
                     }
                     is StateResult.Error -> {
                         loading(false)

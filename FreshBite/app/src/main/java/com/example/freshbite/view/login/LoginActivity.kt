@@ -16,9 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.freshbite.R
 import com.example.freshbite.data.pref.UserModel
 import com.example.freshbite.databinding.ActivityLoginBinding
-import com.example.freshbite.di.Injection
 import com.example.freshbite.di.StateResult
-import com.example.freshbite.retrofit.api.ApiConfig
 import com.example.freshbite.view.ViewModelFactory
 import com.example.freshbite.view.main.MainActivity
 import com.example.freshbite.view.signup.SignupActivity
@@ -37,12 +35,20 @@ class LoginActivity : AppCompatActivity() {
         passwordEdit()
         emailEdit()
         setupView()
-        setupAction()
         playAnimation()
+        setupAction()
 
         binding.textButton.setOnClickListener {
             startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
         }
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        return password.length < 8
     }
 
     private fun passwordEdit() {
@@ -105,28 +111,37 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-            viewModel.userLogin(email, password).observe(this) { result ->
-                if (result != null) {
-                    when (result) {
-                        is StateResult.Loading -> {
-                            loading(true)
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                if (isValidEmail(email)) {
+                    if (!isValidPassword(password)) {
+                        viewModel.firebaseLogin(email, password).observe(this) { result ->
+                            if (result != null) {
+                                when (result) {
+                                    is StateResult.Loading -> {
+                                        loading(true)
+                                    }
+                                    is StateResult.Success -> {
+                                        viewModel.saveSession(UserModel(email, result.data.second.toString()))
+                                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                        startActivity(intent)
+                                        loading(false)
+                                    }
+                                    is StateResult.Error -> {
+                                        loading(false)
+                                        toast(result.error)
+                                    }
+                                }
+                            }
                         }
-                        is StateResult.Success -> {
-                            loading(false)
-                            viewModel.saveSession(UserModel(email, result.data.accessToken.toString()))
-                            val repository = Injection.provideRepository(applicationContext)
-                            repository.getToken(ApiConfig.getApiService(result.data.accessToken.toString()))
-                            result.data.message?.let { it1 -> toast(it1) }
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                            startActivity(intent)
-                        }
-                        is StateResult.Error -> {
-                            loading(false)
-                            toast(result.error)
-                        }
+                    } else {
+                        toast("Password kurang dari 8 karakter")
                     }
+                } else {
+                    toast("Email tidak valid")
                 }
+            } else {
+                toast("Harap masukkan informasi anda terlebih dahulu")
             }
         }
     }

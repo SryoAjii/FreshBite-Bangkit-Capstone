@@ -22,7 +22,7 @@ import com.example.freshbite.view.login.LoginActivity
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
-    private val viewModel by viewModels<SignupViewModel>{
+    private val viewModel by viewModels<SignupViewModel> {
         ViewModelFactory.getInstance(this)
     }
 
@@ -40,6 +40,14 @@ class SignupActivity : AppCompatActivity() {
         binding.textButton.setOnClickListener {
             startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
         }
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        return password.length < 8
     }
 
     private fun passwordEdit() {
@@ -100,37 +108,52 @@ class SignupActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.signupButton.setOnClickListener {
-            val name  = binding.nameEditText.text.toString()
+            val name = binding.nameEditText.text.toString()
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-            viewModel.userRegister(name, email, password).observe(this) { result ->
-                if (result != null) {
-                    when (result) {
-                        is StateResult.Loading -> {
-                            loading(true)
-                        }
-                        is StateResult.Success -> {
-                            result.data.message?.let { it1 -> toast(it1) }
-                            loading(false)
-                            AlertDialog.Builder(this).apply {
-                                setTitle("Yeah!")
-                                setMessage("User dengan email $email sudah jadi nih. Yuk, login sekarang.")
-                                setPositiveButton("Login") { _, _ ->
-                                    val intent = Intent(context, LoginActivity::class.java)
-                                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                    startActivity(intent)
-                                    finish()
+            if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()) {
+                if (isValidEmail(email)) {
+                    if (!isValidPassword(password)) {
+                        viewModel.firebaseRegister(name, email, password).observe(this) { result ->
+                            if (result != null) {
+                                when (result) {
+                                    is StateResult.Loading -> {
+                                        loading(true)
+                                    }
+
+                                    is StateResult.Success -> {
+                                        loading(false)
+                                        AlertDialog.Builder(this).apply {
+                                            setTitle("Yeah!")
+                                            setMessage("User dengan email $email sudah jadi nih. Yuk, login sekarang.")
+                                            setPositiveButton("Login") { _, _ ->
+                                                val intent =
+                                                    Intent(context, LoginActivity::class.java)
+                                                intent.flags =
+                                                    Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                                startActivity(intent)
+                                                finish()
+                                            }
+                                            create()
+                                            show()
+                                        }
+                                    }
+
+                                    is StateResult.Error -> {
+                                        toast(result.error)
+                                        loading(false)
+                                    }
                                 }
-                                create()
-                                show()
                             }
                         }
-                        is StateResult.Error -> {
-                            toast(result.error)
-                            loading(false)
-                        }
+                    } else {
+                        toast("Password kurang dari 8 karakter")
                     }
+                } else {
+                    toast("Email tidak valid")
                 }
+            } else {
+                toast("Harap masukkan informasi anda terlebih dahulu")
             }
         }
     }

@@ -3,18 +3,16 @@ package com.example.freshbite.view.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.freshbite.R
 import com.example.freshbite.databinding.ActivityMainBinding
 import com.example.freshbite.di.StateResult
-import com.example.freshbite.retrofit.response.ArticlesResponseItem
+import com.example.freshbite.retrofit.response.Article
 import com.example.freshbite.view.ViewModelFactory
 import com.example.freshbite.view.camera.CameraActivity
 import com.example.freshbite.view.history.HistoryActivity
-import com.example.freshbite.view.history.HistoryAdapter
 import com.example.freshbite.view.info.InfoActivity
 import com.example.freshbite.view.profile.ProfileActivity
 import com.example.freshbite.view.welcome.WelcomeActivity
@@ -41,15 +39,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.getArticles().observe(this) { result ->
+        viewModel.getArticle().observe(this) { result ->
             if (result != null) {
                 when (result) {
                     is StateResult.Loading -> {
                         loading(true)
                     }
                     is StateResult.Success -> {
-                        loading(false)
                         setArticle(result.data)
+                        loading(false)
                     }
                     is StateResult.Error -> {
                         loading(false)
@@ -63,7 +61,6 @@ class MainActivity : AppCompatActivity() {
                 val search = searchEditText.text.toString()
                 searchEditText.hint = search
                 searchArticle(search)
-                Toast.makeText(this@MainActivity, searchEditText.text, Toast.LENGTH_SHORT).show()
                 false
             }
         }
@@ -122,7 +119,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun searchArticle(title: String) {
-        viewModel.searchArticles(title).observe(this) { result ->
+        viewModel.searchArticle(title).observe(this) { result ->
             if (result != null) {
                 when (result) {
                     is StateResult.Loading -> {
@@ -140,9 +137,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setArticle(article: List<ArticlesResponseItem>) {
-        val adapter = MainAdapter()
-        adapter.submitList(article)
+    private fun setArticle(article: Map<String, Article>) {
+        val adapter = MainAdapter(article.values.toList())
         binding.articleList.layoutManager = LinearLayoutManager(this)
         binding.articleList.adapter = adapter
     }

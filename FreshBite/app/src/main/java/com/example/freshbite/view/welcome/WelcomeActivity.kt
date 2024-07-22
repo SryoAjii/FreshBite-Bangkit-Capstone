@@ -11,7 +11,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.freshbite.databinding.ActivityWelcomeBinding
 import com.example.freshbite.view.login.LoginActivity
-import com.example.freshbite.view.signup.SignupActivity
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeBinding

@@ -14,7 +14,9 @@ class ProfileViewModel(private var repository: Repository): ViewModel(){
         return repository.getSession().asLiveData()
     }
 
-    fun userLogout() = repository.userLogout()
+    fun getUserDetail() = repository.getUserDetail()
+
+    fun firebaseLogout() = repository.firebaseLogout()
     fun logout() {
         viewModelScope.launch {
             repository.logout()

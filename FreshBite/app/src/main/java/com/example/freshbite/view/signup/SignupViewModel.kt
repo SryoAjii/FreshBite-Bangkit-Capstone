@@ -5,5 +5,5 @@ import com.example.freshbite.data.Repository
 
 class SignupViewModel(private val repository: Repository) : ViewModel() {
 
-    fun userRegister(username: String, email: String, password: String) = repository.userRegister(username, email, password)
+    fun firebaseRegister(username: String, email: String, password: String) = repository.firebaseRegister(username, email, password)
 }

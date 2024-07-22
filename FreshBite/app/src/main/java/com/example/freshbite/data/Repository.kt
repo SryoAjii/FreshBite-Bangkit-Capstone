@@ -5,16 +5,17 @@ import com.example.freshbite.data.pref.UserModel
 import com.example.freshbite.data.pref.UserPreference
 import com.example.freshbite.di.StateResult
 import com.example.freshbite.retrofit.api.ApiService
-import com.example.freshbite.retrofit.response.LoginResponse
-import com.example.freshbite.retrofit.response.LogoutResponse
-import com.example.freshbite.retrofit.response.PredictResponse
-import com.example.freshbite.retrofit.response.RegisterResponse
-import com.google.gson.Gson
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.userProfileChangeRequest
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.tasks.await
 import retrofit2.HttpException
+import retrofit2.awaitResponse
 
 class Repository private constructor(
-    private val userPreference: UserPreference, private var apiService: ApiService
+    private val userPreference: UserPreference,
+    private var apiService: ApiService,
+    private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 ) {
 
     suspend fun saveSession(user: UserModel) {
@@ -29,64 +30,81 @@ class Repository private constructor(
         userPreference.logout()
     }
 
-    fun userLogout() = liveData {
+    fun firebaseRegister(username: String, email: String, password: String) = liveData {
         emit(StateResult.Loading)
         try {
-            val responseSuccess = apiService.Logout()
-            emit(StateResult.Success(responseSuccess))
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val responseError = Gson().fromJson(errorBody, LogoutResponse::class.java)
-            emit(responseError.message?.let { StateResult.Error(it) })
+            val registerResult = firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val user = firebaseAuth.currentUser
+                        val profileUpdates = userProfileChangeRequest {
+                            displayName = username
+                        }
+                        user?.updateProfile(profileUpdates)
+                    }
+                }
+            emit(StateResult.Success(registerResult))
+        } catch (e: Exception){
+            emit(StateResult.Error("Registrasi Gagal"))
         }
     }
 
-    fun userLogin(email: String, password: String) = liveData {
+    fun firebaseLogin(email: String, password: String) = liveData {
         emit(StateResult.Loading)
         try {
-            val responseSuccess = apiService.login(email, password)
-            emit(StateResult.Success(responseSuccess))
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val responseError = Gson().fromJson(errorBody, LoginResponse::class.java)
-            emit(responseError.message?.let { StateResult.Error(it) })
+            val loginResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            val token = firebaseAuth.currentUser?.uid
+            emit(StateResult.Success(Pair(loginResult, token)))
+        } catch (e: Exception) {
+            emit(StateResult.Error("Login gagal, periksa kembali username dan password!"))
         }
     }
 
-    fun userRegister(name: String, email: String, password: String) = liveData {
+    fun getUserDetail() = liveData {
         emit(StateResult.Loading)
         try {
-            val responseSuccess = apiService.register(name, email, password)
-            emit(StateResult.Success(responseSuccess))
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val responseError = Gson().fromJson(errorBody, RegisterResponse::class.java)
-            emit(responseError.message?.let { StateResult.Error(it) })
+            val currentUser = firebaseAuth.currentUser
+            val username = currentUser?.displayName.toString()
+            val email = currentUser?.email.toString()
+            emit(StateResult.Success(Pair(email, username)))
+        } catch (e: Exception) {
+            emit(StateResult.Error("Gagal Memuat Informasi User"))
         }
     }
 
-    fun searchArticles(title: String) = liveData {
+    fun firebaseLogout() = liveData {
         emit(StateResult.Loading)
         try {
-            val responseSuccess = apiService.searchArticle(title)
-            emit(StateResult.Success(responseSuccess))
+            val logoutResponse = firebaseAuth.signOut()
+            emit(StateResult.Success(logoutResponse))
+        } catch (e: Exception) {
+            emit(StateResult.Error("Logout gagal"))
+        }
+    }
+
+    fun getArticle() = liveData {
+        emit(StateResult.Loading)
+        try {
+            val response = apiService.getArticle().awaitResponse()
+            val body = response.body() ?: emptyMap()
+            emit(StateResult.Success(body))
         } catch (e: HttpException) {
             emit(StateResult.Error("error"))
         }
     }
 
-    fun getArticles() = liveData {
+    fun searchArticle(query: String) = liveData {
         emit(StateResult.Loading)
         try {
-            val responseSuccess = apiService.getArticles()
-            emit(StateResult.Success(responseSuccess))
+            val response = apiService.getArticle().awaitResponse()
+            val body = response.body() ?: emptyMap()
+            val search = body.filter {
+                it.value.title.contains(query, ignoreCase = true)
+            }
+            emit(StateResult.Success(search))
         } catch (e: HttpException) {
             emit(StateResult.Error("error"))
         }
-    }
-
-    fun getToken(apiService: ApiService) {
-        this.apiService = apiService
     }
 
     companion object {
