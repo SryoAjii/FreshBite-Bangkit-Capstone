@@ -60,6 +60,17 @@ class Repository private constructor(
         }
     }
 
+    fun firebaseLoginAnonymously() = liveData {
+        emit(StateResult.Loading)
+        try {
+            val loginResult = firebaseAuth.signInAnonymously().await()
+            val token = firebaseAuth.currentUser?.uid
+            emit(StateResult.Success(Pair(loginResult, token)))
+        } catch (e: Exception) {
+            emit(StateResult.Error("Login sebagai Guest gagal!"))
+        }
+    }
+
     fun getUserDetail() = liveData {
         emit(StateResult.Loading)
         try {

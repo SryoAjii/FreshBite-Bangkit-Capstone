@@ -12,6 +12,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.freshbite.R
 import com.example.freshbite.data.pref.UserModel
@@ -37,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
         setupView()
         playAnimation()
         setupAction()
+        loginAsGuest()
 
         binding.textButton.setOnClickListener {
             startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
@@ -145,6 +147,41 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun loginAsGuest() {
+        binding.guestButton.setOnClickListener {
+            viewModel.firebaseGuest().observe(this) { result ->
+                when (result) {
+                    is StateResult.Loading -> {
+                        loading(true)
+                    }
+                    is StateResult.Success -> {
+                        val token = result.data.second ?: "UnknownToken"
+                        viewModel.saveSession(UserModel("Guest", token))
+
+                        loading(false)
+                        AlertDialog.Builder(this).apply {
+                            setTitle("Yeah!")
+                            setMessage("Anda Melanjutkan Sebagai Guest")
+                            setPositiveButton("Lanjut") { _, _ ->
+                                val intent = Intent(context, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                startActivity(intent)
+                                finish()
+                            }
+                            create()
+                            show()
+                        }
+                    }
+                    is StateResult.Error -> {
+                        loading(false)
+                        Toast.makeText(this, "Login sebagai Guest gagal", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+    }
+
 
     private fun playAnimation() {
         val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(100)

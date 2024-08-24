@@ -33,7 +33,11 @@ class HistoryAdapter(private val historyList: List<HistoryData>): RecyclerView.A
             "rottenapples" -> holder.historyLabel.text = "Apel Busuk"
             "rottenbananas" -> holder.historyLabel.text = "Pisang Busuk"
         }
-        holder.historyUser.text = history.username
+        if (history.username != "null") {
+            holder.historyUser.text = history.username
+        } else {
+            holder.historyUser.text = "Guest"
+        }
         holder.historyDate.text = history.date
         Glide.with(holder.itemView.context)
             .load(history.imageUrl)

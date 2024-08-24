@@ -37,8 +37,13 @@ class ProfileActivity : AppCompatActivity() {
                         loading(true)
                     }
                     is StateResult.Success -> {
-                        binding.userEmail.text = result.data.first
-                        binding.userName.text = result.data.second
+                        if (result.data.first != "null"){
+                            binding.userEmail.text = result.data.first
+                            binding.userName.text = result.data.second
+                        } else {
+                            binding.userEmail.text = "Guest"
+                            binding.userName.visibility = View.GONE
+                        }
                         loading(false)
                     }
                     is StateResult.Error -> {

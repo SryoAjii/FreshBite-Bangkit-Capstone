@@ -15,4 +15,6 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
 
     fun firebaseLogin(email: String, password: String) = repository.firebaseLogin(email, password)
 
+    fun firebaseGuest() = repository.firebaseLoginAnonymously()
+
 }
