@@ -44,26 +44,13 @@
             tools:text="@string/title" />
 
         <TextView
-            android:id="@+id/tv_item_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            card_view:layout_constraintBottom_toBottomOf="@+id/img_item_photo"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="@+id/tv_item_name"
-            card_view:layout_constraintTop_toBottomOf="@+id/tv_item_name"
-            card_view:layout_constraintVertical_bias="0.0"
-            tools:text="@string/description" />
-
-        <TextView
             android:id="@+id/tv_item_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/tanggal"
             android:textSize="12sp"
             card_view:layout_constraintStart_toStartOf="@+id/tv_item_name"
-            card_view:layout_constraintTop_toBottomOf="@+id/tv_item_description"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_item_name"
             card_view:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

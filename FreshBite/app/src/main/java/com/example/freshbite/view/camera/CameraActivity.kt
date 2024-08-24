@@ -10,12 +10,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.freshbite.databinding.ActivityCameraBinding
-import com.example.freshbite.di.StateResult
 import com.example.freshbite.ml.Model
-import com.example.freshbite.view.ViewModelFactory
 import com.example.freshbite.view.result.ResultActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -35,10 +32,6 @@ class CameraActivity : AppCompatActivity() {
 
     private var imageUri: Uri? = null
 
-    private val viewModel by viewModels<CameraViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
-
     private var imageSize: Int = 224
 
     private lateinit var storageRef: StorageReference
@@ -54,48 +47,29 @@ class CameraActivity : AppCompatActivity() {
 
         binding.cameraButton.setOnClickListener { camera() }
         binding.galleryButton.setOnClickListener { gallery() }
-
-        viewModel.getUser().observe(this) { result ->
-            if (result != null) {
-                when (result) {
-                    is StateResult.Loading -> {
-                        //
-                    }
-
-                    is StateResult.Success -> {
-                        val username = result.data.second
-                        binding.analyzeButton.setOnClickListener {
-                            if (imageUri != null) {
-                                val inputStream = contentResolver.openInputStream(imageUri!!)
-                                val imageBitmap = BitmapFactory.decodeStream(inputStream)
-                                val scaledBitmap = Bitmap.createScaledBitmap(
-                                    imageBitmap,
-                                    imageSize,
-                                    imageSize,
-                                    false
-                                )
-                                analyzeImage(imageUri!!, scaledBitmap, username)
-                            } else {
-                                toast("Mohon masukkan gambar")
-                            }
-                        }
-                        //
-                    }
-
-                    is StateResult.Error -> {
-                        toast(result.error)
-                        //
-                    }
-                }
+        binding.analyzeButton.setOnClickListener {
+            if (imageUri != null) {
+                val inputStream = contentResolver.openInputStream(imageUri!!)
+                val imageBitmap = BitmapFactory.decodeStream(inputStream)
+                val scaledBitmap = Bitmap.createScaledBitmap(
+                    imageBitmap,
+                    imageSize,
+                    imageSize,
+                    false
+                )
+                analyzeImage(imageUri!!, scaledBitmap)
+            } else {
+                toast("Mohon masukkan gambar")
             }
         }
+
 
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
     }
 
-    private fun analyzeImage(imageUri: Uri, image: Bitmap?, user: String) {
+    private fun analyzeImage(imageUri: Uri, image: Bitmap?) {
         loading(true)
         try {
             val model = Model.newInstance(applicationContext)
@@ -158,7 +132,7 @@ class CameraActivity : AppCompatActivity() {
             // Move to the result activity
             moveToResult(resultLabel, resultConfidence)
             uploadImageToFirebase(imageUri) { imageUrl ->
-                saveClassificationToFirestore(resultLabel, user, imageUrl)
+                saveClassificationToFirestore(resultLabel, imageUrl)
             }
             loading(false)
         } catch (e: IOException) {
@@ -188,11 +162,10 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveClassificationToFirestore(result: String?, username: String, imageUrl: String) {
+    private fun saveClassificationToFirestore(result: String?, imageUrl: String) {
         val data = hashMapOf(
             "result" to result,
             "date" to SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(Date()),
-            "username" to username,
             "imageUrl" to imageUrl
         )
 

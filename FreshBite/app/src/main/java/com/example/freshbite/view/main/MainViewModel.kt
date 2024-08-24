@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import com.example.freshbite.data.Repository
-import com.example.freshbite.data.pref.UserModel
 import com.example.freshbite.di.StateResult
 import com.example.freshbite.retrofit.response.Article
 
@@ -44,9 +42,5 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             _filteredArticles.postValue(filteredArticles)
             Log.d("Filter", "Filtered articles size: ${filteredArticles.size}")
         }
-    }
-
-    fun getSession(): LiveData<UserModel> {
-        return repository.getSession().asLiveData()
     }
 }

@@ -1,17 +1,11 @@
 package com.example.freshbite.di
 
-import android.content.Context
 import com.example.freshbite.data.Repository
-import com.example.freshbite.data.pref.UserPreference
-import com.example.freshbite.data.pref.dataStore
 import com.example.freshbite.retrofit.api.ApiConfig
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 
 object Injection {
-    fun provideRepository(context: Context): Repository {
-        val pref = UserPreference.getInstance(context.dataStore)
+    fun provideRepository(): Repository {
         val apiService = ApiConfig.getApiService()
-        return Repository.getInstance(pref, apiService)
+        return Repository.getInstance(apiService)
     }
 }

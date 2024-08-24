@@ -6,7 +6,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.freshbite.R
 import com.example.freshbite.databinding.ActivityMainBinding
 import com.example.freshbite.di.StateResult
 import com.example.freshbite.retrofit.response.Article
@@ -15,8 +14,6 @@ import com.example.freshbite.view.camera.CameraActivity
 import com.example.freshbite.view.history.HistoryActivity
 import com.example.freshbite.view.info.InfoActivity
 import com.example.freshbite.view.map.MapsActivity
-import com.example.freshbite.view.profile.ProfileActivity
-import com.example.freshbite.view.welcome.WelcomeActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
@@ -30,13 +27,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModel.getSession().observe(this) { user ->
-            if (!user.isLogin) {
-                startActivity(Intent(this, WelcomeActivity::class.java))
-                finish()
-            }
-        }
 
         viewModel.getArticle().observe(this) { result ->
             if (result != null) {
@@ -67,17 +57,6 @@ class MainActivity : AppCompatActivity() {
         binding.cameraPage.setOnClickListener {
             val intent = Intent(this@MainActivity, CameraActivity::class.java)
             startActivity(intent)
-        }
-
-        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.profileMenu -> {
-                    val profileIntent = Intent(this@MainActivity, ProfileActivity::class.java)
-                    startActivity(profileIntent)
-                    true
-                }
-                else -> false
-            }
         }
 
         binding.filterButton.setOnClickListener { showRadioButtonDialog() }

@@ -11,7 +11,6 @@ class HistoryAdapter(private val historyList: List<HistoryData>): RecyclerView.A
     inner class ViewHolder(val binding: HistoryItemBinding): RecyclerView.ViewHolder(binding.root) {
         val historyImg = binding.imgItemPhoto
         val historyLabel = binding.tvItemName
-        val historyUser = binding.tvItemDescription
         val historyDate = binding.tvItemDate
     }
 
@@ -32,11 +31,6 @@ class HistoryAdapter(private val historyList: List<HistoryData>): RecyclerView.A
             "rottenoranges" -> holder.historyLabel.text = "Jeruk Busuk"
             "rottenapples" -> holder.historyLabel.text = "Apel Busuk"
             "rottenbananas" -> holder.historyLabel.text = "Pisang Busuk"
-        }
-        if (history.username != "null") {
-            holder.historyUser.text = history.username
-        } else {
-            holder.historyUser.text = "Guest"
         }
         holder.historyDate.text = history.date
         Glide.with(holder.itemView.context)
