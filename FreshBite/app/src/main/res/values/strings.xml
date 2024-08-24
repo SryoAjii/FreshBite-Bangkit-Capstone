@@ -1,4 +1,5 @@
 <resources>
+    <string name="google_maps_key">AIzaSyB0d06aYmq6CbdganAcBjqk2iNf8Eg2jgU</string>
     <string name="app_name"><b>FreshBite</b></string>
     <string name="login">Login</string>
     <string name="signup">Daftar</string>
@@ -136,6 +137,7 @@
         \u2022 Menurunkan berat badan
     </string>
     <string name="cari_artikel">Cari Artikel...</string>
+    <string name="cari_buah">Cari Buah</string>
 
     <string-array name="data_title">
         <item>5 Cara Mengolah Buah Jeruk yang Bercita Rasa Asam, Gak Terbuang!</item>
@@ -192,5 +194,9 @@
         <item>https://www.sayurbox.com/blog/11-aneka-olahan-pisang-yang-enak</item>
         <item>https://www.fimela.com/food/read/5082451/5-resep-olahan-pisang-yang-enak-dan-tidak-eneg</item>
     </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="nama_tempat">Nama Tempat</string>
+    <string name="operasional">Operasional</string>
+    <string name="alamat">Alamat</string>
 
 </resources>
