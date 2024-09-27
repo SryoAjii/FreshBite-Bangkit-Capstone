@@ -74,7 +74,6 @@ class CameraActivity : AppCompatActivity() {
         try {
             val model = Model.newInstance(applicationContext)
 
-            // Prepare input tensor buffer
             val inputFeature0 = TensorBuffer.createFixedSize(
                 intArrayOf(1, imageSize, imageSize, 3),
                 DataType.FLOAT32
@@ -82,7 +81,6 @@ class CameraActivity : AppCompatActivity() {
             val byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3)
             byteBuffer.order(ByteOrder.nativeOrder())
 
-            // Normalize image pixel values to [0, 1] range
             val intValues = IntArray(imageSize * imageSize)
             image?.getPixels(intValues, 0, image.width, 0, 0, image.width, image.height)
             var pixel = 0
@@ -97,15 +95,12 @@ class CameraActivity : AppCompatActivity() {
 
             inputFeature0.loadBuffer(byteBuffer)
 
-            // Run inference
             val outputs = model.process(inputFeature0)
             val outputFeature0 = outputs.outputFeature0AsTensorBuffer
 
-            // Get the confidence array
             val confidences = outputFeature0.floatArray
             Log.e("OUTPUT", confidences.joinToString())
 
-            // Find the index with the highest confidence
             var maxPos = 0
             var maxConfidence = 0f
             for (i in confidences.indices) {
@@ -116,7 +111,6 @@ class CameraActivity : AppCompatActivity() {
             }
             Log.e("DETECTFRUITFRESHNESS", maxPos.toString())
 
-            // Map the index to the corresponding label
             val labels = listOf(
                 "freshapple",
                 "freshbanana",
@@ -129,7 +123,6 @@ class CameraActivity : AppCompatActivity() {
             val resultConfidence = confidences[maxPos]
             model.close()
 
-            // Move to the result activity
             moveToResult(resultLabel, resultConfidence)
             uploadImageToFirebase(imageUri) { imageUrl ->
                 saveClassificationToFirestore(resultLabel, imageUrl)

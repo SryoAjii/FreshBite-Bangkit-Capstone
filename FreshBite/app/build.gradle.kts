@@ -55,7 +55,6 @@ dependencies {
     implementation(libs.androidx.exifinterface)
     implementation(libs.firebase.storage)
     implementation(libs.firebase.firestore)
-    implementation(libs.firebase.auth)
     implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
