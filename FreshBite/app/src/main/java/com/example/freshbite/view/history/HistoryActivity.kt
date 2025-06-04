@@ -1,23 +1,15 @@
 package com.example.freshbite.view.history
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.freshbite.R
 import com.example.freshbite.databinding.ActivityHistoryBinding
 import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.toObject
+import com.google.firebase.firestore.Query
 
 class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
@@ -46,6 +38,7 @@ class HistoryActivity : AppCompatActivity() {
         loading(true)
         val firestore = FirebaseFirestore.getInstance()
         firestore.collection("classifications")
+            .orderBy("date", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshots, error ->
                 if (error != null) {
                     Log.e("Firestore Error", error.message.toString())

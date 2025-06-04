@@ -21,8 +21,8 @@ class ResultActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.resultArticle.layoutManager = layoutManager
 
-        val fruit = intent.getStringExtra("EXTRA_FRUIT")
-        val score = intent.getDoubleExtra("EXTRA_SCORE", 0.0)
+        val fruit = intent.getStringExtra("EXTRA_RESULT")
+        val score = intent.getFloatExtra("EXTRA_SCORE", 0f)
 
         if (fruit != null) {
             binding.resultAnimation.setAnimation(R.raw.success)
@@ -31,19 +31,19 @@ class ResultActivity : AppCompatActivity() {
             when (fruit) {
                 "freshoranges" -> {
                     getBenefit(fruit)
-                    binding.resultLabel.text = "Jeruk Segar ${score.toInt()}%"
+                    binding.resultLabel.text = "Jeruk Segar ${(score * 100).toInt()}%"
                     list.addAll(getArticleList(fruit))
                     showRecycleList()
                 }
                 "freshapple" -> {
                     getBenefit(fruit)
-                    binding.resultLabel.text = "Apel Segar ${score.toInt()}%"
+                    binding.resultLabel.text = "Apel Segar ${(score * 100).toInt()}%"
                     list.addAll(getArticleList(fruit))
                     showRecycleList()
                 }
                 "freshbanana" -> {
                     getBenefit(fruit)
-                    binding.resultLabel.text = "Pisang Segar ${score.toInt()}%"
+                    binding.resultLabel.text = "Pisang Segar ${(score * 100).toInt()}%"
                     list.addAll(getArticleList(fruit))
                     showRecycleList()
                 }
@@ -55,9 +55,9 @@ class ResultActivity : AppCompatActivity() {
                     binding.articleTextview.visibility = View.GONE
                     binding.resultLabel.setBackgroundResource(R.drawable.red_bg)
                     when (fruit) {
-                        "rottenapples" -> binding.resultLabel.text = "Apel Busuk ${score.toInt()}%"
-                        "rottenoranges" -> binding.resultLabel.text = "Jeruk Busuk ${score.toInt()}%"
-                        "rottenbananas" -> binding.resultLabel.text = "Pisang Busuk ${score.toInt()}%"
+                        "rottenapples" -> binding.resultLabel.text = "Apel Busuk ${(score * 100).toInt()}%"
+                        "rottenoranges" -> binding.resultLabel.text = "Jeruk Busuk ${(score * 100).toInt()}%"
+                        "rottenbananas" -> binding.resultLabel.text = "Pisang Busuk ${(score * 100).toInt()}%"
                     }
                 }
             }

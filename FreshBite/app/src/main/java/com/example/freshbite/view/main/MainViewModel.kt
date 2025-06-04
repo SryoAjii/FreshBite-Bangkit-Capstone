@@ -4,25 +4,26 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import com.example.freshbite.data.Repository
-import com.example.freshbite.data.pref.UserModel
 import com.example.freshbite.di.StateResult
-import com.example.freshbite.retrofit.response.ArticlesResponseItem
+import com.example.freshbite.retrofit.response.Article
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _newsItem = MutableLiveData<List<ArticlesResponseItem>>()
-    private val _filteredArticles = MutableLiveData<List<ArticlesResponseItem>>()
+    fun getArticle() = repository.getArticle()
+    fun searchArticle(query: String) = repository.searchArticle(query)
 
-    val newsItem: LiveData<List<ArticlesResponseItem>> get() = _filteredArticles
+    private val _newsItem = MutableLiveData<Map<String, Article>>()
+    private val _filteredArticles = MutableLiveData<Map<String, Article>>()
+
+    val newsItem: LiveData<Map<String, Article>> get() = _filteredArticles
 
     init {
         fetchArticles()
     }
 
     private fun fetchArticles() {
-        getArticles().observeForever { result ->
+        getArticle().observeForever { result ->
             if (result is StateResult.Success) {
                 _newsItem.postValue(result.data)
                 _filteredArticles.postValue(result.data)
@@ -36,18 +37,10 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             val filteredArticles = if (tag == "tidak ada") {
                 articles
             } else {
-                articles.filter { it.tag == tag }
+                articles.filter { it.value.tag == tag }
             }
             _filteredArticles.postValue(filteredArticles)
             Log.d("Filter", "Filtered articles size: ${filteredArticles.size}")
         }
     }
-
-    fun getSession(): LiveData<UserModel> {
-        return repository.getSession().asLiveData()
-    }
-
-    fun searchArticles(title: String) = repository.searchArticles(title)
-
-    fun getArticles() = repository.getArticles()
 }

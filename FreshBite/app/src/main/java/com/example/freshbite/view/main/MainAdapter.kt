@@ -4,16 +4,14 @@ import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.freshbite.databinding.ArticleItemBinding
-import com.example.freshbite.retrofit.response.ArticlesResponseItem
+import com.example.freshbite.retrofit.response.Article
 
-class MainAdapter: ListAdapter<ArticlesResponseItem, MainAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class MainAdapter(private val listArticle: List<Article>): RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
     inner class MyViewHolder(val binding: ArticleItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(article: ArticlesResponseItem) {
+        fun bind(article: Article) {
             val title = binding.articleTitle
             val description = binding.articleDescription
             val image = binding.articleImage
@@ -35,20 +33,13 @@ class MainAdapter: ListAdapter<ArticlesResponseItem, MainAdapter.MyViewHolder>(D
         return MyViewHolder(binding)
     }
 
+    override fun getItemCount(): Int {
+        return listArticle.size
+    }
+
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = getItem(position)
+        val item = listArticle[position]
         holder.bind(item)
     }
 
-    companion object {
-        val DIFF_CALLBACK = object: DiffUtil.ItemCallback<ArticlesResponseItem>() {
-            override fun areItemsTheSame(oldItem: ArticlesResponseItem, newItem: ArticlesResponseItem): Boolean {
-                return oldItem == newItem
-            }
-
-            override fun areContentsTheSame(oldItem: ArticlesResponseItem, newItem: ArticlesResponseItem): Boolean {
-                return oldItem == newItem
-            }
-        }
-    }
 }
